@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE Chinese: 相似字 Interactive Worksheet</title>
+    <style>
+        body {
+            font-family: Arial, 'Noto Sans SC', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .question.active {
+            display: block;
+        }
+        .question p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .choices button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+        }
+        .choices button:hover {
+            background-color: #2980b9;
+        }
+        #feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .correct {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .incorrect {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        #progress {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        #nextBtn {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #2ecc71;
+            color: white;
+            text-align: center;
+        }
+        #nextBtn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IGCSE Chinese: 相似字 Interactive Worksheet</h1>
+        <p style="text-align: center;">Choose the correct 相似字 to complete each sentence. You must answer correctly to proceed.</p>
+        <div id="progress">Question 1 of 10</div>
+        <div id="question1" class="question active">
+            <p>我每天早上都会（练/链）习跑步来保持健康。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(1, '练', true)">练</button>
+                <button onclick="checkAnswer(1, '链', false)">链</button>
+            </div>
+        </div>
+        <div id="question2" class="question">
+            <p>这本书的内容非常（深/婶）刻，值得一读。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(2, '深', true)">深</button>
+                <button onclick="checkAnswer(2, '婶', false)">婶</button>
+            </div>
+        </div>
+        <div id="question3" class="question">
+            <p>他用（绳/升）子把箱子绑得紧紧的。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(3, '绳', true)">绳</button>
+                <button onclick="checkAnswer(3, '升', false)">升</button>
+            </div>
+        </div>
+        <div id="question4" class="question">
+            <p>这场比赛的（结/洁）果让大家都感到意外。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(4, '结', true)">结</button>
+                <button onclick="checkAnswer(4, '洁', false)">洁</button>
+            </div>
+        </div>
+        <div id="question5" class="question">
+            <p>她喜欢在（闲/娴）暇时间画画。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(5, '闲', true)">闲</button>
+                <button onclick="checkAnswer(5, '娴', false)">娴</button>
+            </div>
+        </div>
+        <div id="question6" class="question">
+            <p>我们需要（保/抱）护环境，减少污染。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(6, '保', true)">保</button>
+                <button onclick="checkAnswer(6, '抱', false)">抱</button>
+            </div>
+        </div>
+        <div id="question7" class="question">
+            <p>这件衣服的（质/志）量非常好，穿起来很舒服。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(7, '质', true)">质</button>
+                <button onclick="checkAnswer(7, '志', false)">志</button>
+            </div>
+        </div>
+        <div id="question8" class="question">
+            <p>他（继/季）续努力，终于实现了自己的目标。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(8, '继', true)">继</button>
+                <button onclick="checkAnswer(8, '季', false)">季</button>
+            </div>
+        </div>
+        <div id="question9" class="question">
+            <p>这个城市的（景/境）色非常美丽，吸引了很多游客。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(9, '景', true)">景</button>
+                <button onclick="checkAnswer(9, '境', false)">境</button>
+            </div>
+        </div>
+        <div id="question10" class="question">
+            <p>老师鼓励我们要（积/稽）极参与课堂讨论。</p>
+            <div class="choices">
+                <button onclick="checkAnswer(10, '积', true)">积</button>
+                <button onclick="checkAnswer(10, '稽', false)">稽</button>
+            </div>
+        </div>
+        <div id="feedback"></div>
+        <button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 10;
+
+        function checkAnswer(questionNum, selected, isCorrect) {
+            const feedbackDiv = document.getElementById('feedback');
+            feedbackDiv.style.display = 'block';
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (isCorrect) {
+                feedbackDiv.className = 'correct';
+                nextBtn.style.display = 'block';
+                switch (questionNum) {
+                    case 1:
+                        feedbackDiv.innerHTML = '正确！“练”指练习，如“练习跑步”。“链”指链条，如“自行车链条”。';
+                        break;
+                    case 2:
+                        feedbackDiv.innerHTML = '正确！“深”指深刻，如“内容深刻”。“婶”指婶婶，如“我的婶婶”。';
+                        break;
+                    case 3:
+                        feedbackDiv.innerHTML = '正确！“绳”指绳子，如“用绳子绑”。“升”指上升或容量单位，如“温度上升”。';
+                        break;
+                    case 4:
+                        feedbackDiv.innerHTML = '正确！“结”指结果，如“比赛结果”。“洁”指干净，如“清洁房间”。';
+                        break;
+                    case 5:
+                        feedbackDiv.innerHTML = '正确！“闲”指空闲，如“闲暇时间”。“娴”指熟练，如“技艺娴熟”。';
+                        break;
+                    case 6:
+                        feedbackDiv.innerHTML = '正确！“保”指保护，如“保护环境”。“抱”指拥抱，如“抱住孩子”。';
+                        break;
+                    case 7:
+                        feedbackDiv.innerHTML = '正确！“质”指质量，如“衣服质量”。“志”指志向，如“远大志向”。';
+                        break;
+                    case 8:
+                        feedbackDiv.innerHTML = '正确！“继”指继续，如“继续努力”。“季”指季节，如“秋季”。';
+                        break;
+                    case 9:
+                        feedbackDiv.innerHTML = '正确！“景”指景色，如“美丽景色”。“境”指环境或境界，如“生活环境”。';
+                        break;
+                    case 10:
+                        feedbackDiv.innerHTML = '正确！“积”指积极，如“积极参与”。“稽”指滑稽或考查，如“滑稽表演”。';
+                        break;
+                }
+            } else {
+                feedbackDiv.className = 'incorrect';
+                nextBtn.style.display = 'none';
+                feedbackDiv.innerHTML = '错误！请重新选择正确的字。';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+                currentQuestion++;
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+                document.getElementById('progress').innerText = `Question ${currentQuestion} of ${totalQuestions}`;
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('nextBtn').style.display = 'none';
+            } else {
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+                document.getElementById('progress').innerText = 'Congratulations! You have completed the worksheet!';
+                document.getElementById('feedback').innerHTML = '<p class="correct">Well done! You have mastered these 相似字.</p>';
+                document.getElementById('nextBtn').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
